@@ -9,7 +9,7 @@ export default class Task extends Component {
       $set: { checked: !this.props.task.checked },
     });
   }
- 
+ //Remove the task by id
   deleteThisTask() {
     Tasks.remove(this.props.task._id);
   }
@@ -27,7 +27,9 @@ export default class Task extends Component {
         checked={!!this.props.task.checked}
         onClick={this.toggleChecked.bind(this)}
       />
-      <span className="text">{this.props.task.text}</span>
+      <span className="text">
+        <strong>{this.props.task.username}</strong>: {this.props.task.text}
+      </span>
     </li>
   );
 }

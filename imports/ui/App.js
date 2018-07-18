@@ -3,6 +3,9 @@ import { withTracker } from 'meteor/react-meteor-data';
 import ReactDOM from 'react-dom';
 import { Tasks } from '../api/tasks.js';
 import Task from './Task.js';
+import { Meteor } from 'meteor/meteor';
+import AccountsUIWrapper from './AccountsUIWrapper.js';
+
  
 // App component - represents the whole app
 
@@ -21,6 +24,8 @@ class App extends Component {
     Tasks.insert({
       text,
       createdAt: new Date(), //new Date object with time 
+      owner: Meteor.userId(), // _id of logged in user
+      username: Meteor.user().username, // username of logged in user
     });
  
     // Clear form
@@ -40,13 +45,24 @@ class App extends Component {
       <Task key={task._id} task={task} />
     ));
   }
+
+  renderTypeTask() {
+    return this.props.currentUser ?
+    <form className="new-task" onSubmit={this.handleSubmit.bind(this)} >
+      <input
+        type="text" 
+        ref="textInput"
+        placeholder="Type to add new tasks"
+      />
+    </form> : '' //Ternary operation for submitting tasks if user is logged in.
+  }
  
   render() {
     return (
       <div className="container">
         <header>
           <h1>Todo List ({this.props.incompleteCount})</h1>
-          <div class="completedTask">{this.props.completeCount} Completed Tasks</div>
+          <div className="completedTask"><b>{this.props.completeCount}</b> Completed Tasks</div>
           <label className="hide-completed">
             <input
               type="checkbox"
@@ -54,15 +70,10 @@ class App extends Component {
               checked={this.state.hideCompleted}
               onClick={this.toggleHideCompleted.bind(this)}
             />
-            Hide Completed Tasks
+            <b>Hide Completed Tasks</b>
           </label>
-          <form className="new-task" onSubmit={this.handleSubmit.bind(this)} >
-            <input
-              type="text"
-              ref="textInput"
-              placeholder="Enter Your Task"
-            />
-          </form>
+          <AccountsUIWrapper />
+          {this.renderTypeTask()}
         </header>
         <ul>
           {this.renderTasks()}
@@ -71,10 +82,14 @@ class App extends Component {
     );
   }
 }
+
 export default withTracker(() => {
   return {
     tasks: Tasks.find({}, { sort: { createdAt: -1 } }).fetch(),
+    //MongoDB commands for checking how many tasks completed 
+    //or not completed.
     incompleteCount: Tasks.find({ checked: { $ne: true } }).count(),
-    completeCount: Tasks.find({checked: {$eq: true} }).count()
+    completeCount: Tasks.find({checked: {$eq: true} }).count(),
+    currentUser: Meteor.user()
   };
 })(App);

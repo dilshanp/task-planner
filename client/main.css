@@ -17,16 +17,16 @@ body {
 
 .completedTask{
   float: right;
-  text-align: right;
+  position: relative;
+  clear: right;
   font-size: 10px;
 }
 
 .hide-completed{
   float: right;
-  text-align: right;
+  position: relative;
+  clear: right;
   font-size: 10px;
-  bottom: 10;  
-  top: 50;
 }
 
 .container {
@@ -36,8 +36,6 @@ body {
   background: white;
 }
 
-
- 
 header {
   background: #d2edf4;
   background-image: linear-gradient(to bottom, #d0edf5, #e1e5f0 100%);

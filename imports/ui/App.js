@@ -20,14 +20,7 @@ class App extends Component {
     event.preventDefault();
     // Find the text field via the React ref
     const text = ReactDOM.findDOMNode(this.refs.textInput).value.trim();
- 
-    Tasks.insert({
-      text,
-      createdAt: new Date(), //new Date object with time 
-      owner: Meteor.userId(), // _id of logged in user
-      username: Meteor.user().username, // username of logged in user
-    });
- 
+    Meteor.call('tasks.insert', text);
     // Clear form
     ReactDOM.findDOMNode(this.refs.textInput).value = '';
   }
@@ -61,8 +54,8 @@ class App extends Component {
     return (
       <div className="container">
         <header>
-          <h1>Todo List ({this.props.incompleteCount})</h1>
-          <div className="completedTask"><b>{this.props.completeCount}</b> Completed Tasks</div>
+          <h1>Task Planner ({this.props.incompleteCount})</h1>
+          <div className="completedTask"><b>{this.props.completeCount}</b> Completed Task(s) </div>
           <label className="hide-completed">
             <input
               type="checkbox"

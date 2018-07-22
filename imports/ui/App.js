@@ -6,7 +6,6 @@ import Task from './Task.js';
 import { Meteor } from 'meteor/meteor';
 import AccountsUIWrapper from './AccountsUIWrapper.js';
 
- 
 // App component - represents the whole app
 
 class App extends Component {
@@ -34,9 +33,12 @@ class App extends Component {
     if (this.state.hideCompleted) {
       filteredTasks = filteredTasks.filter(task => !task.checked);
     }
-    return filteredTasks.map((task) => (
-      <Task key={task._id} task={task} />
-    ));
+    return filteredTasks.map((task) => {
+      const currentUserId = this.props.currentUser && this.props.currentUser._id;
+      const showPrivateButton = task.owner === currentUserId;
+      return (<Task key={task._id} task={task} showPrivateButton={showPrivateButton} />
+      );
+    });
   }
 
   renderTypeTask() {
@@ -47,7 +49,7 @@ class App extends Component {
         ref="textInput"
         placeholder="Type to add new tasks"
       />
-    </form> : '' //Ternary operation for submitting tasks if user is logged in.
+    </form> : '' //Ternary op for submitting tasks if user is logged in.
   }
  
   render() {
@@ -55,7 +57,7 @@ class App extends Component {
       <div className="container">
         <header>
           <h1>Task Planner ({this.props.incompleteCount})</h1>
-          <div className="completedTask"><b>{this.props.completeCount}</b> Completed Task(s) </div>
+          <div className="completedTask"><b>{this.props.completeCount}</b> Completed Tasks</div>
           <label className="hide-completed">
             <input
               type="checkbox"
@@ -77,6 +79,7 @@ class App extends Component {
 }
 
 export default withTracker(() => {
+  Meteor.subscribe('tasks');
   return {
     tasks: Tasks.find({}, { sort: { createdAt: -1 } }).fetch(),
     //MongoDB commands for checking how many tasks completed 

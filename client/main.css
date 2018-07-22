@@ -15,23 +15,33 @@ body {
   font-size: 30px;
 }
 
-.completedTask{
+.completedTask { 
+  float: right;
+  position: relative;
+  clear: right;
+  font-size: 30px;
+}
+
+.hide-completed {
   float: right;
   position: relative;
   clear: right;
   font-size: 20px;
-  padding-bottom: 1em;
-}
+  padding-top: 0.5  em;
 
-.hide-completed{
-  float: right;
-  position: relative;
-  clear: right;
-  font-size: 20px;
 }
-
+.toggle-private {
+  font-size: 12px;
+  border: 2px solid #4CAF50;
+  border-radius: 12px;
+  transition-duration: 0.4s;
+}
+.toggle-private:hover {
+  background-color: #4CAF50;
+  color: white;
+}
 .container {
-  max-width: 800px;
+  max-width: 927px;
   margin: 0 auto;
   min-height: 100%;
   background: white;

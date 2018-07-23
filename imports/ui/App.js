@@ -13,7 +13,15 @@ class App extends Component {
     super(props);
     this.state = {
       hideCompleted: false,
+      time: new Date()
     };
+  }
+  currentTime(){
+    this.setState({
+        time: new Date()})
+  }
+  componentWillMount() {
+    setInterval(() => this.currentTime(), 1000)
   }
   handleSubmit(event) {
     event.preventDefault();
@@ -43,11 +51,11 @@ class App extends Component {
 
   renderTypeTask() {
     return this.props.currentUser ?
-    <form className="new-task" onSubmit={this.handleSubmit.bind(this)} >
+    <form className="new-task" onSubmit={this.handleSubmit.bind(this)}>
       <input
         type="text" 
         ref="textInput"
-        placeholder="Type to add new tasks"
+        placeholder="Type here to add new tasks"
       />
     </form> : '' //Ternary op for submitting tasks if user is logged in.
   }
@@ -55,6 +63,8 @@ class App extends Component {
   render() {
     return (
       <div className="container">
+        <div id="date">{this.state.time.toLocaleDateString()}</div> 
+        <div id="time">{this.state.time.toLocaleTimeString()} MST</div> 
         <header>
           <h1>Task Planner ({this.props.incompleteCount})</h1>
           <div className="completedTask"><b>{this.props.completeCount}</b> Completed Tasks</div>

@@ -59,11 +59,19 @@ class App extends Component {
       />
     </form> : '' //Ternary op for submitting tasks if user is logged in.
   }
+
+  // function getDayOfWeek(date, {
+  //   let dateTime = date + " " + time;
+  //   var birthday = new Date(dateTime);
+  //   var day1 = birthday.getDay();
+  //   console.log(day1);
+  //   return day1;
+  // }
  
   render() {
     return (
       <div className="container">
-        <div id="date">{this.state.time.toLocaleDateString()}</div> 
+        <div id="date">{this.state.time.toLocaleDateString()}</div>
         <div id="time">{this.state.time.toLocaleTimeString()} MST</div> 
         <header>
           <h1>Task Planner ({this.props.incompleteCount})</h1>

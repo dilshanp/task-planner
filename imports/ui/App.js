@@ -45,6 +45,7 @@ class App extends Component {
     setInterval(() => this.currentTime(), 1000)
   }
     
+
   handleSubmit(event) {
     event.preventDefault();
     // Find the text field via the React ref

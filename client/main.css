@@ -1,6 +1,6 @@
 body {
   font-family: sans-serif;
-  background-image: linear-gradient(to bottom, #315481, #918e82 100%);
+  background-image: linear-gradient(to bottom, lightsteelblue, darkblue 100%);
   background-attachment: fixed;
   position: absolute;
   top: 0;
@@ -76,13 +76,13 @@ body {
 
 .toggle-private {
   font-size: 10px;
-  border: 2px solid #4CAF50;
+  border: 2px solid white;
   border-radius: 10px;
   transition-duration: 0.4s;
 }
 
 .toggle-private:hover {
-  background-color: #4CAF50;
+  background-color: black;
   color: white;
 }
 
@@ -98,6 +98,10 @@ header {
   background-image: linear-gradient(to bottom, #d0edf5, #e1e5f0 100%);
   padding: 20px 15px 15px 15px;
   position: relative;
+  border-bottom: black solid 2px;
+  border-left: black solid 2px;
+  border-right: black solid 2px;
+
 }
  
 #login-buttons {
@@ -110,12 +114,14 @@ h1 {
   margin-bottom: 10px;
   display: inline-block;
   margin-right: 1em;
+  font-family: Apple Chancery;
 }
  
 form {
   margin-top: 10px;
   margin-bottom: -10px;
   position: relative;
+  
 }
  
 .new-task input {
@@ -126,6 +132,7 @@ form {
   width: 100%;
   padding-right: 80px;
   font-size: 1em;
+  
 }
  
 .new-task input:focus{
@@ -138,7 +145,7 @@ form {
 ul {
   margin: 0;
   padding: 0;
-  background: white;
+  background: lightsteelblue;
 }
  
 .delete {
@@ -154,11 +161,12 @@ li {
   position: relative;
   list-style: none;
   padding: 15px;
-  border-bottom: #eee solid 1px;
+  border-bottom: black solid 2px;
 }
- 
+
 li .text {
   margin-left: 10px;
+  word-wrap: break-word; 
 }
  
 li.checked {
@@ -170,8 +178,9 @@ li.checked .text {
 }
  
 li.private {
-  background: #eee;
+  background: lightcoral;
   border-color: #ddd;
+  border-bottom: black solid 2px;
 }
  
 header .hide-completed {

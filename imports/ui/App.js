@@ -13,7 +13,8 @@ class App extends Component {
     super(props);
     this.state = {
       hideCompleted: false,
-      time: new Date()
+      time: new Date(),
+      day: undefined
     };
   }
   currentTime(){
@@ -21,8 +22,29 @@ class App extends Component {
         time: new Date()})
   }
   componentWillMount() {
+    var d = new Date();
+    var n = d.getDay();
+    let dayName;
+    if (n == 1) {
+      dayName = 'Monday';
+    } else if (n == 2) {
+      dayName = 'Tuesday';
+    } else if (n == 3) {
+      dayName = 'Wednesday';
+    } else if (n == 4) {
+      dayName = 'Thursday';
+    } else if (n == 5) {
+      dayName = 'Friday';
+    } else if (n == 6) {
+      dayName = 'Saturday';
+    } else if (n == 7) {
+      dayName = 'Sunday';
+    }
+    this.setState({
+        day: dayName})
     setInterval(() => this.currentTime(), 1000)
   }
+    
   handleSubmit(event) {
     event.preventDefault();
     // Find the text field via the React ref
@@ -59,20 +81,12 @@ class App extends Component {
       />
     </form> : '' //Ternary op for submitting tasks if user is logged in.
   }
-
-  // function getDayOfWeek(date, {
-  //   let dateTime = date + " " + time;
-  //   var birthday = new Date(dateTime);
-  //   var day1 = birthday.getDay();
-  //   console.log(day1);
-  //   return day1;
-  // }
  
   render() {
     return (
       <div className="container">
         <div id="date">{this.state.time.toLocaleDateString()}</div>
-        <div id="time">{this.state.time.toLocaleTimeString()} MST</div> 
+        <div id="time">{this.state.time.toLocaleTimeString()} PST</div> 
         <header>
           <h1>Task Planner ({this.props.incompleteCount})</h1>
           <div className="completedTask"><b>{this.props.completeCount}</b> Completed Tasks</div>

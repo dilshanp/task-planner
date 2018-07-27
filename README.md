@@ -2,7 +2,8 @@
 A web application that allows multiple users to log in and manage their daily tasks.
 ## Languages / Software
 * Built with Meteor Web Framework which is written using Node.js
-* Built web content layout, structure, and design with HTML, CSS, and JavaScript
+* Components of web app constructed in React: a JavaScript library for building UI's.
+* Also made use of general layout and design using HTML, CSS, and JS.
 * Accounts UI was built using BlazeUI, an open source modular toolkit
 * Tasks were stored and managed with Meteor's MongoDB Collection module
 ## Features
